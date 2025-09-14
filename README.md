@@ -1,87 +1,108 @@
-Telegram Web App Deployment Bot
-This is a Python-based Telegram bot that allows you to execute shell commands on a server, making it easier to deploy web applications.
+<div align="center">
 
-🚨🚨🚨 Extremely Important Security Warning 🚨🚨🚨
+🤖 Telegram Bridge bot
+A simple, powerful Python bot to execute shell commands on your server directly from Telegram.
+
+</div>
+
+This is a Python-based Telegram bot that allows you to execute shell commands on a server, making it easier to deploy web applications directly from Telegram.
+
+🚨 Extremely Important Security Warning
+Warning
 This bot can provide full terminal access to your server. If misused or if it falls into the wrong hands, your server could be completely compromised. Use this at your own risk.
 
-Keep Your Bot Token Secure: Do not share your TELEGRAM_BOT_TOKEN with anyone.
+🔒 Keep Your Bot Token Secure: Do not share your TELEGRAM_BOT_TOKEN with anyone.
 
-User ID Whitelisting: The bot will only listen to commands sent from the ALLOWED_USER_ID. This is a basic security measure.
+👤 User ID Whitelisting: The bot will only listen to commands sent from the ALLOWED_USER_ID. This is a basic but crucial security measure.
 
-Server Security: Ensure that your server is also protected by other security measures.
+🛡️ Server Security: Ensure that your server is also protected by other security measures like firewalls and regular updates.
 
-Features
-/start: Starts the bot and displays the security warning.
+✨ Features
+/start: Initializes the bot and displays the security warning.
 
-Direct Command Execution: Any text message sent (other than /start) is executed as a shell command.
+Direct Command Execution: Any text message is executed as a shell command.
 
-Working Directory: All commands are executed in a predefined PROJECT_DIRECTORY.
+Persistent Working Directory: All commands are executed within a predefined PROJECT_DIRECTORY, and you can navigate using cd.
 
-Output/Error Reporting: The standard output and standard error of the command are sent back to you on Telegram.
+Real-time Output: Get the standard output and error of your commands sent back to you on Telegram.
 
-Long Output Handling: Long outputs are split into 4096-character chunks before being sent.
+Long Output Handling: Outputs longer than 4096 characters are automatically split into multiple messages.
 
-How to Setup
-1. Prerequisites
+🚀 Getting Started
+Follow these instructions to get your bot up and running on your server.
+
+Prerequisites
 Python 3.8+
 
 pip (Python package installer)
 
-A Telegram account
+A Telegram Account
 
-A server where you want to run this bot.
+A server (Linux, macOS, or Windows) where you want to run the bot.
 
-2. Obtain a Bot Token
-Talk to BotFather on Telegram.
+Installation & Configuration
+Get a Bot Token from BotFather
 
-Use the /newbot command to create a new bot.
+Open Telegram and talk to @BotFather.
 
-Follow its instructions. BotFather will give you an HTTP API token. Keep this token safe.
+Use the /newbot command and follow the instructions.
 
-3. Get Your Telegram User ID
+BotFather will give you an HTTP API token. Copy it and keep it safe.
+
+Get Your Telegram User ID
+
 Talk to @userinfobot on Telegram.
 
 Send the /start command.
 
 The bot will reply with your User ID.
 
-4. Installation and Configuration
-Clone this repository or download the bot.py file to your server.
+Clone & Install Dependencies
+
+Download or clone the bot.py file to your server.
 
 Install the required Python library:
 
 Bash
 
 pip install python-telegram-bot
-Edit the bot.py file and fill in the following variables with your information:
+Configure the Bot
 
-TELEGRAM_BOT_TOKEN: Enter your token obtained from BotFather here.
+Open the bot.py file and fill in your details in the configuration section:
 
-ALLOWED_USER_ID: Enter your User ID obtained from @userinfobot here.
+Python
 
-PROJECT_DIRECTORY: The path of the directory where you want to execute commands (e.g., /var/www/my-project).
+# --- CONFIGURATION ---
+TELEGRAM_BOT_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN' # BotFather se mila token
+ALLOWED_USER_ID = 123456789                  # @userinfobot se mila ID
+PROJECT_DIRECTORY = '/var/www/my-project'      # Aapka project folder
+Run the Bot
 
-5. Run the Bot
-In your server's terminal, run the following command:
+Execute the script from your server's terminal:
 
 Bash
 
 python bot.py
-Your bot is now online. To keep it running permanently, use a tool like a systemd service or screen/tmux.
+To keep the bot running 24/7, use a process manager like systemd or run it inside a screen or tmux session.
 
-How to Use
-Open your bot in your Telegram client.
+💻 How to Use
+Open your bot in Telegram.
 
 Type /start to begin.
 
-Now, send any shell command, such as:
+Send any shell command you want to execute. For example:
 
+Bash
+
+# Check files in the current directory
 ls -l
 
+# Pull the latest changes from your Git repository
 git pull origin main
 
+# Rebuild and restart your Docker containers
 docker-compose up -d --build
 
+# Install dependencies and build your frontend project
 npm install && npm run build
-
-The bot will execute the command in the PROJECT_DIRECTORY and send the output back to you.
+The bot will execute the command in the specified PROJECT_DIRECTORY and send the output back to you. Happy deploying!
